@@ -2,21 +2,26 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-export default async function Home() {
+export default async function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   const supabase = createServerComponentClient({ cookies })
   
   const {
     data: { session },
   } = await supabase.auth.getSession()
 
-  if (!session) {
-    redirect('/auth/login')
+  if (session) {
+    redirect('/')
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold">Welcome to Revive</h1>
-      <p className="mt-4 text-xl">Your service marketplace</p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        {children}
+      </div>
     </div>
   )
 }
