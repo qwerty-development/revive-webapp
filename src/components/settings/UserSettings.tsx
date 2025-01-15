@@ -9,7 +9,6 @@ import {
   Mail,
   Phone,
   Lock,
-  Bell,
   Eye,
   EyeOff,
   Loader2,
