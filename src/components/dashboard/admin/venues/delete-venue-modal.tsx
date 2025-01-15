@@ -60,17 +60,17 @@ export default function DeleteVenueModal({ isOpen, venue, onClose, onSuccess }: 
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg max-w-md w-full mx-4 p-6">
+    <div className="fixed inset-0 bg-black/50 dark:bg-black/70 z-50 flex items-center justify-center">
+      <div className="bg-white dark:bg-gray-800 rounded-lg max-w-md w-full mx-4 p-6">
         <div className="flex items-center space-x-3">
           <div className="flex-shrink-0">
-            <AlertTriangle className="h-6 w-6 text-red-600" />
+            <AlertTriangle className="h-6 w-6 text-red-600 dark:text-red-400" />
           </div>
           <div>
-            <h3 className="text-lg font-medium text-gray-900">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white">
               Delete Venue
             </h3>
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-300">
               Are you sure you want to delete {venue.name}? This action cannot be undone,
               and all associated data will be permanently removed.
             </p>
@@ -78,8 +78,8 @@ export default function DeleteVenueModal({ isOpen, venue, onClose, onSuccess }: 
         </div>
 
         {error && (
-          <div className="mt-4 bg-red-50 border-l-4 border-red-400 p-4">
-            <p className="text-sm text-red-700">{error}</p>
+          <div className="mt-4 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-400 dark:border-red-600 p-4">
+            <p className="text-sm text-red-700 dark:text-red-400">{error}</p>
           </div>
         )}
 
@@ -87,7 +87,7 @@ export default function DeleteVenueModal({ isOpen, venue, onClose, onSuccess }: 
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-gray-700 border rounded-lg hover:bg-gray-50"
+            className="px-4 py-2 text-gray-700 dark:text-gray-300 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/10"
             disabled={isLoading}
           >
             Cancel
@@ -95,7 +95,7 @@ export default function DeleteVenueModal({ isOpen, venue, onClose, onSuccess }: 
           <button
             type="button"
             onClick={handleDelete}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 flex items-center space-x-2"
+            className="px-4 py-2 bg-red-600 dark:bg-red-700 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-800 flex items-center space-x-2"
             disabled={isLoading}
           >
             {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}

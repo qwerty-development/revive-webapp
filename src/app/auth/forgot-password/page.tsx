@@ -1,48 +1,50 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { Mail, ArrowLeft, Loader2, CheckCircle } from 'lucide-react'
-import Link from 'next/link'
+import { useState } from "react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Mail, ArrowLeft, Loader2, CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [isEmailSent, setIsEmailSent] = useState(false)
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isEmailSent, setIsEmailSent] = useState(false);
 
-  const supabase = createClientComponentClient()
+  const supabase = createClientComponentClient();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
     try {
+      // In your forgot password component
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/auth/reset-password`,
-      })
+      });
 
-      if (error) throw error
+      if (error) throw error;
 
-      setIsEmailSent(true)
+      setIsEmailSent(true);
     } catch (error: any) {
-      console.error('Error:', error)
-      setError(error.message)
+      console.error("Error:", error);
+      setError(error.message);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-black py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-800 py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md">
         <div className="text-center">
           <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
             Reset your password
           </h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Enter your email address and we&apos;ll send you a link to reset your password
+            Enter your email address and we&apos;ll send you a link to reset
+            your password
           </p>
         </div>
 
@@ -56,7 +58,7 @@ export default function ForgotPasswordPage() {
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
                 We&apos;ve sent a password reset link to {email}
               </p>
-              <Link 
+              <Link
                 href="/auth/login"
                 className="flex items-center text-sm text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
               >
@@ -67,9 +69,12 @@ export default function ForgotPasswordPage() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                >
                   Email address
                 </label>
                 <div className="mt-1 relative">
@@ -92,7 +97,9 @@ export default function ForgotPasswordPage() {
 
               {error && (
                 <div className="mt-4 bg-red-50 dark:bg-red-900/50 border-l-4 border-red-400 p-4">
-                  <p className="text-sm text-red-700 dark:text-red-200">{error}</p>
+                  <p className="text-sm text-red-700 dark:text-red-200">
+                    {error}
+                  </p>
                 </div>
               )}
 
@@ -105,13 +112,13 @@ export default function ForgotPasswordPage() {
                   {isLoading ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
                   ) : (
-                    'Send reset link'
+                    "Send reset link"
                   )}
                 </button>
               </div>
 
               <div className="mt-6 flex items-center justify-center">
-                <Link 
+                <Link
                   href="/auth/login"
                   className="flex items-center text-sm text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
                 >
@@ -124,5 +131,5 @@ export default function ForgotPasswordPage() {
         )}
       </div>
     </div>
-  )
+  );
 }

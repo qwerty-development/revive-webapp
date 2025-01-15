@@ -6,12 +6,17 @@ export async function middleware(req: NextRequest) {
   const res = NextResponse.next()
   const supabase = createMiddlewareClient({ req, res })
 
+  // Special case for reset-password route
+  if (req.nextUrl.pathname === '/auth/reset-password') {
+    return res
+  }
+
   const {
     data: { session },
   } = await supabase.auth.getSession()
 
   // Define route patterns
-  const authRoutes = ['/auth/login', '/auth/register', '/auth/forgot-password', '/auth/reset-password', '/auth/change-password']
+  const authRoutes = ['/auth/login', '/auth/register', '/auth/forgot-password', '/auth/change-password']
   const adminRoutes = ['/dashboard/admin', '/dashboard/users', '/dashboard/venues']
   const storeRoutes = ['/dashboard/venue', '/dashboard/manage-requests']
   const userRoutes = ['/dashboard/requests', '/dashboard/profile']

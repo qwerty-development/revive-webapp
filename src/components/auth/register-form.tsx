@@ -88,8 +88,8 @@ export function RegisterForm() {
       }
 
     return (
-        <div className="w-full ">
-            <div className="bg-white rounded-xl shadow-lg p-8">
+        <div className="w-full mt-20">
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8">
                 <form onSubmit={onSubmit} className="space-y-6">
                     {/* Name Fields */}
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -97,13 +97,13 @@ export function RegisterForm() {
                         <div>
                             <label
                                 htmlFor="firstName"
-                                className="block text-sm font-medium text-gray-700 mb-1"
+                                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                             >
                                 First Name
                             </label>
                             <div className="relative rounded-md shadow-sm">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <User className="h-5 w-5 text-gray-400" />
+                                    <User className="h-5 w-5 text-gray-400 dark:text-gray-500" />
                                 </div>
                                 <input
                                     id="firstName"
@@ -112,7 +112,7 @@ export function RegisterForm() {
                                     required
                                     value={formData.firstName}
                                     onChange={handleInputChange}
-                                    className="block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    className="block w-full pl-10 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent dark:bg-gray-700 dark:text-white"
                                     placeholder="John"
                                     disabled={isLoading}
                                 />
@@ -123,13 +123,13 @@ export function RegisterForm() {
                         <div>
                             <label
                                 htmlFor="lastName"
-                                className="block text-sm font-medium text-gray-700 mb-1"
+                                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                             >
                                 Last Name
                             </label>
                             <div className="relative rounded-md shadow-sm">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <User className="h-5 w-5 text-gray-400" />
+                                    <User className="h-5 w-5 text-gray-400 dark:text-gray-500" />
                                 </div>
                                 <input
                                     id="lastName"
@@ -138,7 +138,7 @@ export function RegisterForm() {
                                     required
                                     value={formData.lastName}
                                     onChange={handleInputChange}
-                                    className="block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    className="block w-full pl-10 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent dark:bg-gray-700 dark:text-white"
                                     placeholder="Doe"
                                     disabled={isLoading}
                                 />
@@ -150,13 +150,13 @@ export function RegisterForm() {
                     <div>
                         <label
                             htmlFor="email"
-                            className="block text-sm font-medium text-gray-700 mb-1"
+                            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                         >
                             Email
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <Mail className="h-5 w-5 text-gray-400" />
+                                <Mail className="h-5 w-5 text-gray-400 dark:text-gray-500" />
                             </div>
                             <input
                                 id="email"
@@ -166,7 +166,7 @@ export function RegisterForm() {
                                 required
                                 value={formData.email}
                                 onChange={handleInputChange}
-                                className="block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className="block w-full pl-10 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent dark:bg-gray-700 dark:text-white"
                                 placeholder="john@example.com"
                                 disabled={isLoading}
                             />
@@ -177,13 +177,13 @@ export function RegisterForm() {
                     <div>
                         <label
                             htmlFor="phone"
-                            className="block text-sm font-medium text-gray-700 mb-1"
+                            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                         >
                             Phone Number
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <Phone className="h-5 w-5 text-gray-400" />
+                                <Phone className="h-5 w-5 text-gray-400 dark:text-gray-500" />
                             </div>
                             <input
                                 id="phone"
@@ -192,7 +192,7 @@ export function RegisterForm() {
                                 required
                                 value={formData.phone}
                                 onChange={handleInputChange}
-                                className="block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className="block w-full pl-10 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent dark:bg-gray-700 dark:text-white"
                                 placeholder="+1 (555) 000-0000"
                                 disabled={isLoading}
                             />
@@ -203,13 +203,13 @@ export function RegisterForm() {
                     <div>
                         <label
                             htmlFor="password"
-                            className="block text-sm font-medium text-gray-700 mb-1"
+                            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                         >
                             Password
                         </label>
                         <div className="relative rounded-md shadow-sm">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <Lock className="h-5 w-5 text-gray-400" />
+                                <Lock className="h-5 w-5 text-gray-400 dark:text-gray-500" />
                             </div>
                             <input
                                 id="password"
@@ -218,7 +218,7 @@ export function RegisterForm() {
                                 required
                                 value={formData.password}
                                 onChange={handleInputChange}
-                                className="block w-full pl-10 pr-10 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                className="block w-full pl-10 pr-10 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-600 focus:border-transparent dark:bg-gray-700 dark:text-white"
                                 placeholder="Create a password"
                                 disabled={isLoading}
                             />
@@ -228,9 +228,9 @@ export function RegisterForm() {
                                 onClick={() => setShowPassword(!showPassword)}
                             >
                                 {showPassword ? (
-                                    <EyeOff className="h-5 w-5 text-gray-400" />
+                                    <EyeOff className="h-5 w-5 text-gray-400 dark:text-gray-500" />
                                 ) : (
-                                    <Eye className="h-5 w-5 text-gray-400" />
+                                    <Eye className="h-5 w-5 text-gray-400 dark:text-gray-500" />
                                 )}
                             </button>
                         </div>
@@ -238,33 +238,33 @@ export function RegisterForm() {
 
                     {/* Error Message */}
                     {error && (
-                        <div className="bg-red-50 border-l-4 border-red-400 p-4">
-                            <div className="flex">
-                                <div className="flex-shrink-0">
-                                    <svg
-                                        className="h-5 w-5 text-red-400"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                </div>
-                                <div className="ml-3">
-                                    <p className="text-sm text-red-700">{error}</p>
-                                </div>
-                            </div>
-                        </div>
+                       <div className="bg-red-50 dark:bg-red-800/20 border-l-4 border-red-400 dark:border-red-600 p-4">
+                         <div className="flex">
+                           <div className="flex-shrink-0">
+                             <svg
+                               className="h-5 w-5 text-red-400 dark:text-red-500"
+                               viewBox="0 0 20 20"
+                               fill="currentColor"
+                             >
+                               <path
+                                 fillRule="evenodd"
+                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                 clipRule="evenodd"
+                               />
+                             </svg>
+                           </div>
+                           <div className="ml-3">
+                             <p className="text-sm text-red-700 dark:text-red-400">{error}</p>
+                           </div>
+                         </div>
+                       </div>
                     )}
 
                     {/* Submit Button */}
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-700 dark:hover:bg-blue-800 dark:focus:ring-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {isLoading ? (
                             <svg
@@ -294,10 +294,10 @@ export function RegisterForm() {
                     {/* Social Login Divider */}
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
-                            <div className="w-full border-t border-gray-300"></div>
+                            <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
                         </div>
                         <div className="relative flex justify-center text-sm">
-                            <span className="px-2 bg-white text-gray-500">
+                           <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
                                 Or continue with
                             </span>
                         </div>
@@ -309,7 +309,7 @@ export function RegisterForm() {
                             type="button"
                             onClick={() => handleSocialSignup('google')}
                             disabled={isLoading}
-                            className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                            className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/70"
                         >
                             <span className="sr-only">Sign up with Google</span>
                             <svg
@@ -326,7 +326,7 @@ export function RegisterForm() {
                             type="button"
                             onClick={() => handleSocialSignup('apple')}
                             disabled={isLoading}
-                            className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                           className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/70"
                         >
                             <span className="sr-only">Sign up with Apple</span>
                             <svg
@@ -340,14 +340,14 @@ export function RegisterForm() {
                         </button>
                     </div>
                 </form>
-
-                <p className="mt-6 text-center text-sm text-gray-600">
+             
+                <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
                     By signing up, you agree to our{' '}
-                    <Link href="/terms" className="font-medium text-blue-600 hover:text-blue-500">
+                    <Link href="/terms" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
                         Terms of Service
                     </Link>{' '}
                     and{' '}
-                    <Link href="/privacy" className="font-medium text-blue-600 hover:text-blue-500">
+                    <Link href="/privacy" className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
                         Privacy Policy
                     </Link>
                 </p>

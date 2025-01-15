@@ -65,11 +65,17 @@ const navItems: NavItem[] = [
     title: 'Analytics',
     href: '/dashboard/admin/analytics',
     icon: <BarChart2 className="w-5 h-5" />,
-    roles: ['admin', 'store']
+    roles: ['admin']
+  },
+  {
+    title: 'Analytics',
+    href: '/dashboard/store/analytics',
+    icon: <BarChart2 className="w-5 h-5" />,
+    roles: [ 'store']
   },
   {
     title: 'Settings',
-    href: '/dashboard/admin/settings',
+    href: '/dashboard/settings',
     icon: <Settings className="w-5 h-5" />,
     roles: ['user', 'admin', 'store']
   }
@@ -79,12 +85,14 @@ export default function DashboardSidebar({ userRole }: { userRole: string }) {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
 
+  
+
   return (
     <>
       {/* Mobile Menu Button */}
-      <button
+       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed bottom-4 right-4 z-50 bg-blue-600 text-white p-3 rounded-full shadow-lg"
+        className="lg:hidden  fixed bottom-4 right-4 z-50 bg-blue-600 text-white p-3 rounded-full shadow-lg dark:bg-blue-700"
       >
         {isOpen ? (
           <X className="w-6 h-6" />
@@ -102,9 +110,9 @@ export default function DashboardSidebar({ userRole }: { userRole: string }) {
       )}
 
       {/* Sidebar */}
-      <div
+       <div
         className={cn(
-          "fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white dark:bg-gray h-screen transform transition-transform duration-200 ease-in-out lg:translate-x-0",
+          "fixed lg:static border-r border-gray-900 inset-y-0 left-0 z-40 w-64 bg-white dark:bg-gray-800 h-screen transform transition-transform duration-200 ease-in-out lg:translate-x-0",
           {
             "translate-x-0": isOpen,
             "-translate-x-full": !isOpen
@@ -122,10 +130,10 @@ export default function DashboardSidebar({ userRole }: { userRole: string }) {
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                    "flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors dark:text-gray-300",
                     pathname === item.href 
-                      ? "bg-blue-50 text-blue-700" 
-                      : "text-gray-700 hover:bg-gray-100"
+                      ? "bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-400" 
+                      : "text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300"
                   )}
                 >
                   {item.icon}

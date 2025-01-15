@@ -15,9 +15,8 @@ export default function CreateVenueModal({ isOpen, onClose, onSuccess }: CreateV
   const [error, setError] = useState<string | null>(null)
   const [creationSuccess, setCreationSuccess] = useState(false)
   const [tempPassword, setTempPassword] = useState<string | null>(null)
-// Add this to your existing state
-const [image, setImage] = useState<File | null>(null)
-const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [image, setImage] = useState<File | null>(null)
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
   const [formData, setFormData] = useState({
     venueName: '',
@@ -40,17 +39,17 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
     }))
   }
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
-      setImage(file)
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string)
-      }
-      reader.readAsDataURL(file)
+        setImage(file)
+        const reader = new FileReader()
+        reader.onloadend = () => {
+            setImagePreview(reader.result as string)
+        }
+        reader.readAsDataURL(file)
     }
-  }
+}
   
   const uploadImage = async (userId: string) => {
     if (!image) return null
@@ -107,7 +106,7 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
           imageUrl = await uploadImage(authData.user.id)
         }
 
-        // 3. Update the profile in a single operation
+         // 3. Update the profile in a single operation
         const { error: profileError } = await supabase
           .from('profiles')
           .upsert({ 
@@ -126,6 +125,7 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
           console.error('Profile Error:', profileError)
           throw profileError
         }
+
 
         // 4. Create the venue after profile is updated
         const { error: venueError } = await supabase
@@ -155,7 +155,6 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
     }
   }
 
-  
 
   const handleCopy = async () => {
     if (!tempPassword) return
@@ -178,15 +177,15 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4">
-        <div className="flex items-center justify-between px-6 py-4 border-b">
-          <h2 className="text-xl font-semibold text-gray-900">
+    <div className="fixed inset-0 bg-black/50 dark:bg-black/70 z-50 flex items-center justify-center">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full mx-4">
+        <div className="flex items-center justify-between px-6 py-4 border-b dark:border-gray-700">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
             {creationSuccess ? 'Venue Created Successfully' : 'Create New Venue'}
           </h2>
           <button
             onClick={handleClose}
-            className="text-gray-400 hover:text-gray-500 transition-colors"
+            className="text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 transition-colors"
           >
             <X className="h-5 w-5" />
           </button>
@@ -194,37 +193,37 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
 
         {creationSuccess ? (
           <div className="p-6 space-y-6">
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+            <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-600 rounded-lg p-4">
               <div className="mb-4">
-                <h3 className="text-green-800 font-medium mb-1">
+                <h3 className="text-green-800 dark:text-green-400 font-medium mb-1">
                   Venue Manager Credentials
                 </h3>
-                <p className="text-sm text-green-700">
+                <p className="text-sm text-green-700 dark:text-green-300">
                   Please save these credentials and share them securely with the venue manager.
                 </p>
               </div>
               
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium text-green-800">Email</label>
-                  <p className="text-sm text-green-700">{formData.managerEmail}</p>
+                  <label className="block text-sm font-medium text-green-800 dark:text-green-400">Email</label>
+                  <p className="text-sm text-green-700 dark:text-green-300">{formData.managerEmail}</p>
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-green-800 mb-1">
+                  <label className="block text-sm font-medium text-green-800 dark:text-green-400 mb-1">
                     Temporary Password
                   </label>
                   <div className="flex items-center gap-2">
-                    <code className="flex-1 bg-white px-3 py-2 rounded border text-sm font-mono">
+                    <code className="flex-1 bg-white dark:bg-gray-700 px-3 py-2 rounded border dark:border-gray-600 text-sm font-mono dark:text-white">
                       {tempPassword}
                     </code>
                     <button
                       onClick={handleCopy}
-                      className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded transition-colors"
+                      className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/10 rounded transition-colors"
                       title="Copy password"
                     >
                       {copied ? (
-                        <Check className="h-5 w-5 text-green-600" />
+                        <Check className="h-5 w-5 text-green-600 dark:text-green-400" />
                       ) : (
                         <Copy className="h-5 w-5" />
                       )}
@@ -237,7 +236,7 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
             <div className="flex justify-end">
               <button
                 onClick={handleClose}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                className="bg-blue-600 dark:bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors"
               >
                 Done
               </button>
@@ -247,12 +246,12 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
           <form onSubmit={handleSubmit} className="p-6 space-y-6">
             <div className="space-y-6">
             <div className="space-y-4">
-  <h3 className="text-lg font-medium text-gray-900">Venue Image</h3>
+  <h3 className="text-lg font-medium text-gray-900 dark:text-white">Venue Image</h3>
   <div className="flex flex-col items-center">
     <div className="w-full max-w-md relative">
       <label 
         className={`flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer
-          ${imagePreview ? 'border-transparent' : 'border-gray-300 bg-gray-50 hover:bg-gray-100'}`}
+          ${imagePreview ? 'border-transparent' : 'border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700/10'}`}
       >
         {imagePreview ? (
           <div className="relative w-full h-full">
@@ -267,13 +266,13 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center py-6">
-            <svg className="w-10 h-10 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-10 h-10 text-gray-400 dark:text-gray-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            <p className="mb-2 text-sm text-gray-500">
+            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
               <span className="font-semibold">Click to upload</span> or drag and drop
             </p>
-            <p className="text-xs text-gray-500">PNG, JPG up to 10MB</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG up to 10MB</p>
           </div>
         )}
         <input
@@ -290,7 +289,7 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
             setImage(null)
             setImagePreview(null)
           }}
-          className="absolute top-2 right-2 p-1.5 bg-red-600 text-white rounded-full hover:bg-red-700"
+          className="absolute top-2 right-2 p-1.5 bg-red-600 text-white rounded-full hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
         >
           <X className="w-4 h-4" />
         </button>
@@ -301,11 +300,11 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
               {/* Venue Information */}
 
               <div className="space-y-4">
-                <h3 className="text-lg font-medium text-gray-900">Venue Information</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white">Venue Information</h3>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Venue Name
                     </label>
                     <input
@@ -314,19 +313,19 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
                       value={formData.venueName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Type
                     </label>
                     <select
                       name="type"
                       value={formData.type}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                       className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400"
                     >
                       <option value="restaurant">Restaurant</option>
                       <option value="club">Club</option>
@@ -335,7 +334,7 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Location
                   </label>
                   <input
@@ -344,12 +343,12 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
                     value={formData.location}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                   className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Description
                   </label>
                   <textarea
@@ -357,18 +356,18 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
                     value={formData.description}
                     onChange={handleInputChange}
                     rows={3}
-                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400"
                   />
                 </div>
               </div>
 
               {/* Manager Information */}
               <div className="space-y-4">
-                <h3 className="text-lg font-medium text-gray-900">Manager Information</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white">Manager Information</h3>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       First Name
                     </label>
                     <input
@@ -377,12 +376,12 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
                       value={formData.managerFirstName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                       className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Last Name
                     </label>
                     <input
@@ -391,14 +390,14 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
                       value={formData.managerLastName}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                       className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Email
                     </label>
                     <input
@@ -407,12 +406,12 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
                       value={formData.managerEmail}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                       className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Phone
                     </label>
                     <input
@@ -421,7 +420,7 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
                       value={formData.managerPhone}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-400"
                     />
                   </div>
                 </div>
@@ -429,8 +428,8 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
             </div>
 
             {error && (
-              <div className="bg-red-50 border-l-4 border-red-400 p-4">
-                <p className="text-sm text-red-700">{error}</p>
+               <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-400 dark:border-red-600 p-4">
+                <p className="text-sm text-red-700 dark:text-red-400">{error}</p>
               </div>
             )}
 
@@ -438,14 +437,14 @@ const [imagePreview, setImagePreview] = useState<string | null>(null)
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 text-gray-700 border rounded-lg hover:bg-gray-50 transition-colors"
+               className="px-4 py-2 text-gray-700 dark:text-gray-300 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/10 transition-colors"
                 disabled={isLoading}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                 className="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors disabled:opacity-50"
                 disabled={isLoading}
               >
                 {isLoading ? 'Creating...' : 'Create Venue'}

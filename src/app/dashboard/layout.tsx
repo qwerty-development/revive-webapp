@@ -23,11 +23,11 @@ export default async function DashboardLayout({
     .single()
 
   return (
-    <div className="min-h-screen bg-gray-100 ">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-800">
       <DashboardHeader userRole={profile?.role} userProfile={profile} />
       <div className="flex h-[calc(100vh-4rem)]">
         <DashboardSidebar userRole={profile?.role || 'user'} />
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-6 dark:bg-gray-800 dark:text-white">
           {children}
         </main>
       </div>

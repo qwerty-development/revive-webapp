@@ -14,7 +14,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-24">
+    <div className="flex bg-gray-50 dark:bg-gray-800 min-h-screen flex-col items-center justify-center p-24">
       <h1 className="text-4xl font-bold">Welcome to Revive</h1>
       <p className="mt-4 text-xl">Your service marketplace</p>
     </div>
