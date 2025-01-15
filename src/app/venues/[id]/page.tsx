@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 import { notFound, redirect } from 'next/navigation'
 import VenueDetails from '@/components/dashboard/user/venues/VenueDetails'
 
-export default async function VenuePage({ params }: { params: { id: string } }) {
+export default async function VenuePage({ params }: any) {
   const supabase = createServerComponentClient({ cookies })
 
   // Get user session
