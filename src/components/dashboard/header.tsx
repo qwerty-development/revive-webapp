@@ -21,44 +21,32 @@ export default function DashboardHeader({
   const router = useRouter()
   const supabase = createClientComponentClient()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [currentProfile, setCurrentProfile] = useState(userProfile)
-  const [currentRole, setCurrentRole] = useState(userRole)
-
-  useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_OUT') {
-        router.push('/auth/login')
-        router.refresh()
-      } else if (session?.user.id) {
-        // Fetch latest user profile when auth state changes
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single()
-
-        if (profile) {
-          setCurrentProfile(profile)
-          setCurrentRole(profile.role)
-        }
-      }
-    })
-
-    return () => {
-      subscription.unsubscribe()
-    }
-  }, [supabase, router])
-
-  // Update local state when props change
-  useEffect(() => {
-    setCurrentProfile(userProfile)
-    setCurrentRole(userRole)
-  }, [userProfile, userRole])
 
   const handleSignOut = async () => {
-    setIsMenuOpen(false)
-    await supabase.auth.signOut()
+    try {
+      await supabase.auth.signOut()
+      setIsMenuOpen(false)
+      // Use window.location for a complete refresh
+      window.location.href = '/auth/login'
+    } catch (error) {
+      console.error('Error signing out:', error)
+      // Fallback if sign out fails
+      router.push('/auth/login')
+      router.refresh()
+    }
   }
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isMenuOpen && !(event.target as Element).closest('.user-menu')) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isMenuOpen])
 
   return (
     <header className="bg-white dark:bg-gray-800 h-16 border-b dark:border-gray-700 fixed top-0 left-0 right-0 z-30">
@@ -72,21 +60,21 @@ export default function DashboardHeader({
             <Bell className="w-5 h-5 text-gray-600 dark:text-gray-400" />
           </button>
 
-          <div className="relative">
+          <div className="relative user-menu">
             <button
               className="flex items-center space-x-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <User className="w-5 h-5 text-gray-600 dark:text-gray-400" />
               <span className="text-sm font-medium hidden sm:block dark:text-white">
-                {currentProfile?.first_name} {currentProfile?.last_name}
+                {userProfile?.first_name} {userProfile?.last_name}
               </span>
             </button>
 
             {isMenuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-700 rounded-md shadow-lg py-1 z-50">
                 <p className="px-4 py-2 text-sm text-gray-500 border-b dark:border-gray-600 dark:text-gray-300">
-                  Role: {currentRole?.charAt(0).toUpperCase() + currentRole?.slice(1)}
+                  Role: {userRole?.charAt(0).toUpperCase() + userRole?.slice(1)}
                 </p>
                 <button
                   onClick={handleSignOut}
