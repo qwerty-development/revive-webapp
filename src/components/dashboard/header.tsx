@@ -3,7 +3,7 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import { Bell, User } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 type Profile = {
   first_name: string
@@ -23,9 +23,30 @@ export default function DashboardHeader({
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut()
-    router.push('/auth/login')
+    try {
+      await supabase.auth.signOut()
+      setIsMenuOpen(false)
+      // Use window.location for a complete refresh
+      window.location.href = '/auth/login'
+    } catch (error) {
+      console.error('Error signing out:', error)
+      // Fallback if sign out fails
+      router.push('/auth/login')
+      router.refresh()
+    }
   }
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isMenuOpen && !(event.target as Element).closest('.user-menu')) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isMenuOpen])
 
   return (
     <header className="bg-white dark:bg-gray-800 h-16 border-b dark:border-gray-700 fixed top-0 left-0 right-0 z-30">
@@ -39,7 +60,7 @@ export default function DashboardHeader({
             <Bell className="w-5 h-5 text-gray-600 dark:text-gray-400" />
           </button>
 
-          <div className="relative">
+          <div className="relative user-menu">
             <button
               className="flex items-center space-x-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
